@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pobcrawl_tracker/6_Dashboard.dart';
 
 class SeeAllOngoing extends StatefulWidget {
   const SeeAllOngoing({super.key});
@@ -34,13 +35,13 @@ class _SeeAllOngoingState extends State<SeeAllOngoing> {
                       height: 80,
                       child: FloatingActionButton(
                         onPressed: () {
-                          // Get.to(
-                          //   () => const ScanYourQR(),
-                          //   transition: Transition.rightToLeft,
-                          //   duration: const Duration(
-                          //     milliseconds: 400,
-                          //   ),
-                          // );
+                          Get.to(
+                            () => const Dashboard(),
+                            transition: Transition.rightToLeft,
+                            duration: const Duration(
+                              milliseconds: 400,
+                            ),
+                          );
                         },
                         backgroundColor: Color(0xFF5B84C4),
                         shape: RoundedRectangleBorder(
