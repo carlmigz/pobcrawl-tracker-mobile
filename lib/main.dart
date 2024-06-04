@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pobcrawl_tracker/GetStarted.dart';
-import 'package:pobcrawl_tracker/LoginPage.dart';
-import 'package:pobcrawl_tracker/SplashScreen.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:pobcrawl_tracker/3_GetStarted.dart';
+import 'package:pobcrawl_tracker/4_ScanYourQr.dart';
+import 'package:pobcrawl_tracker/2_SignUpPage.dart';
+import 'package:pobcrawl_tracker/1_SplashScreen.dart';
+import 'package:pobcrawl_tracker/5_SeeAllOngoing.dart';
 import 'package:pobcrawl_tracker/test.dart';
 
 void main() {
@@ -13,9 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: SeeAllOngoing(),
     );
   }
 }

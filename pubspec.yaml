@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
@@ -32,7 +33,12 @@ flutter:
     - assets/images/decor-6.png
     - assets/images/FAB-img.png
     - assets/images/qr-img.png
-    - assets/images/divider-img.png
+    - assets/images/divider-img.png  
+    - assets/images/scan-your-qr.png  
+
+  # Background Images:
+    - assets/images/see-all-ongoing-bg.png 
 
   # Icons
     - assets/icons/hide-pass-ic.png
+    - assets/icons/scan-qr-ic.png
