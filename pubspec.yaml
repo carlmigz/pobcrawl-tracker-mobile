@@ -17,6 +17,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.0
   google_fonts: 6.1.0
+  carousel_slider: 4.2.1
 
 
 flutter:
@@ -35,10 +36,15 @@ flutter:
     - assets/images/qr-img.png
     - assets/images/divider-img.png  
     - assets/images/scan-your-qr.png  
+    - assets/images/dashboard-home-indicator.png  
 
   # Background Images:
     - assets/images/see-all-ongoing-bg.png 
-
+  # Carousel Images:
+    - assets/images/carousel/fun-roof-img.png
   # Icons
     - assets/icons/hide-pass-ic.png
     - assets/icons/scan-qr-ic.png
+    - assets/icons/time-ic.png
+    - assets/icons/loc-ic.png
+    - assets/icons/rec-ic.png
