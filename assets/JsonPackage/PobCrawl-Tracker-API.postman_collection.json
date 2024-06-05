@@ -1,0 +1,1075 @@
+{
+	"info": {
+		"_postman_id": "be19733f-826d-4593-8d23-c7865e4c55d7",
+		"name": "PobCrawl-Tracker-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34971867",
+		"_collection_link": "https://winter-capsule-906555.postman.co/workspace/PobCrawl-Tracker-Workspace~de39c3f8-a06d-400a-bada-dcf2396ea056/collection/34971867-be19733f-826d-4593-8d23-c7865e4c55d7?action=share&source=collection_link&creator=34971867"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Angel\",\r\n    \"lastName\": \"Viola\",\r\n    \"emailAddress\": \"anonymous.test0988@gmail.com\",\r\n    \"password\": \"angel12345!\",\r\n    \"confirmPassword\": \"angel12345!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/accounts/register",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailAddress\": \"anonymous.test0988@gmail.com\",\r\n    \"password\": \"angel12345!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/accounts/login",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MzViMzk2Ni00N2VmLTRlZDUtOWZhZS02ZDlkYzRkOTRiOGEiLCJpYXQiOjE3MTYzNTk4NjQsImV4cCI6MTcxNjM2NzA2NH0.ZdB6kCO9mQWXgrlJIV2vqT8LVYl1Q3_K6FFqTuimwCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Angel\",\r\n    \"lastName\": \"Viola\",\r\n    \"emailAddress\": \"anonymous.test0988@gmail.com\",\r\n    \"password\": \"angel12345\",\r\n    \"oldPassword\": \"angel12345\",\r\n    \"newPassword\": \"angel12345!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/accounts/edit-profile",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"edit-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MzViMzk2Ni00N2VmLTRlZDUtOWZhZS02ZDlkYzRkOTRiOGEiLCJpYXQiOjE3MTYzNTk4NjQsImV4cCI6MTcxNjM2NzA2NH0.ZdB6kCO9mQWXgrlJIV2vqT8LVYl1Q3_K6FFqTuimwCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Angel\",\r\n    \"lastName\": \"Viola\",\r\n    \"emailAddress\": \"anonymous.test0988@gmail.com\",\r\n    \"password\": \"angel12345!\",\r\n    \"oldPassword\": \"angel12345!\",\r\n    \"newPassword\": \"angel12345!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/accounts/user/535b3966-47ef-4ed5-9fae-6d9dc4d94b8a",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"user",
+								"535b3966-47ef-4ed5-9fae-6d9dc4d94b8a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pubs",
+			"item": [
+				{
+					"name": "Create Pubs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGZlNzlmZS1iMWFlLTRhMTAtYjM5Yy05YjU5YWY0NWNjN2QiLCJpYXQiOjE3MTc0Nzk1NjEsImV4cCI6MTcxNzQ4Njc2MX0.4JVlo9eIqdjygI-PZ5U0fgUwkJUBaPlUZaJRicKp4GU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n        \"name\": \"Pub\",\n        \"longitude\": 121.023415,\n        \"latitude\": 14.556586,\n        \"openingTime\": \"10:00:00\",\n        \"closingTime\": \"13:00:00\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "pubImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1ef13e94-f6a5-40d0-9bd1-1221bb02d001",
+										"postman-cloud:///1ef13e84-ae7f-4270-ba32-3365b0d49b55"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/pubs/create",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pubs",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pubs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjE5NjYsImV4cCI6MTcxNjUyOTE2Nn0.7Vr3vlgH7j29RNRHH5g46WRqg5B3RYS0J0k4i0ykZ8k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n    \"name\": \"The Fun Roof Taytay\",\n    \"longitude\": \"121.023415\",\n    \"latitude\": \"14.556586\",\n    \"openingTime\": \"12:00:00\",\n    \"closingTime\": \"\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "pubImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1ef13e84-ae7f-4270-ba32-3365b0d49b55",
+										"postman-cloud:///1ef13e94-f6a5-40d0-9bd1-1221bb02d001"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/pubs/c2fa443e-6dc5-401e-aa85-2ddea6bc79ba/update",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pubs",
+								"c2fa443e-6dc5-401e-aa85-2ddea6bc79ba",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pubs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjE5NjYsImV4cCI6MTcxNjUyOTE2Nn0.7Vr3vlgH7j29RNRHH5g46WRqg5B3RYS0J0k4i0ykZ8k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/pubs/c2fa443e-6dc5-401e-aa85-2ddea6bc79ba/force-delete",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pubs",
+								"c2fa443e-6dc5-401e-aa85-2ddea6bc79ba",
+								"force-delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Pubs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGZlNzlmZS1iMWFlLTRhMTAtYjM5Yy05YjU5YWY0NWNjN2QiLCJpYXQiOjE3MTc0ODk4NjQsImV4cCI6MTcxNzQ5NzA2NH0.AkKskHntaXKT7wJ1BmwWMe9xcpyxWbY54CWfj6R9_t4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/pubs/show-all",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pubs",
+								"show-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pubs By ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjE5NjYsImV4cCI6MTcxNjUyOTE2Nn0.7Vr3vlgH7j29RNRHH5g46WRqg5B3RYS0J0k4i0ykZ8k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/pubs/c2fa443e-6dc5-401e-aa85-2ddea6bc79ba/search",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pubs",
+								"c2fa443e-6dc5-401e-aa85-2ddea6bc79ba",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lives",
+			"item": [
+				{
+					"name": "Create Lives",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGZlNzlmZS1iMWFlLTRhMTAtYjM5Yy05YjU5YWY0NWNjN2QiLCJpYXQiOjE3MTc0ODk4NjQsImV4cCI6MTcxNzQ5NzA2NH0.AkKskHntaXKT7wJ1BmwWMe9xcpyxWbY54CWfj6R9_t4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n    \"pubId\": \"1898441e-0982-4ae5-8285-aaf32628cc81\",\n    \"startTime\": \"09:00\"\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/lives/create",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lives",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Lives",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n    \"pubId\": \"12cc90a7-97a4--8e4e0d06\",\n    \"startTime\": \"10:00\",\n    \"endTime\": \"02:00\"\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/lives/61465749-38dc-4fd0-9b8a-690fdb7db6aa/update",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lives",
+								"61465749-38dc-4fd0-9b8a-690fdb7db6aa",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Lives",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n        \"pubId\": \"12cc90a7-97a4-49c0-8f47-1e6c0e4e0d06\",\n        \"startTime\": \"09:00\",\n        \"endTime\": \"11:00\",\n        \"status\": \"Live\"\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/lives/dcd43778-fbf0-4e4e-9039-81b0eff494b5/delete",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lives",
+								"dcd43778-fbf0-4e4e-9039-81b0eff494b5",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Lives by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n        \"pubId\": \"12cc90a7-97a4-49c0-8f47-1e6c0e4e0d06\",\n        \"startTime\": \"09:00\",\n        \"endTime\": \"11:00\",\n        \"status\": \"Live\"\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/lives/61465749-38dc-4fd0-9b8a-690fdb7db6aa/list",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lives",
+								"61465749-38dc-4fd0-9b8a-690fdb7db6aa",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Lives",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGZlNzlmZS1iMWFlLTRhMTAtYjM5Yy05YjU5YWY0NWNjN2QiLCJpYXQiOjE3MTc0ODk4NjQsImV4cCI6MTcxNzQ5NzA2NH0.AkKskHntaXKT7wJ1BmwWMe9xcpyxWbY54CWfj6R9_t4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/lives/all",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lives",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "In creating Live, the status will be dependent on the input. If you only input the startTime, the status is \"Live\". If you input both startTime and endTime, the status is \"Finished\".\n\n- Sample body for creating \"Live\":\n    \n\n{ \"pubId\": \"12cc90a7-97a4-49c0-8f47-1e6c0e4e0d06\",\n\n\"startTime\": \"09:00\" }\n\n- Sample body for creating \"Finished\":\n    \n\n{ \"pubId\": \"12cc90a7-97a4-49c0-8f47-1e6c0e4e0d06\",\n\n\"startTime\": \"09:00\",\n\n\"endTime\": \"11:00\" }"
+		},
+		{
+			"name": "Emergencies",
+			"item": [
+				{
+					"name": "Create Emergencies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGZlNzlmZS1iMWFlLTRhMTAtYjM5Yy05YjU5YWY0NWNjN2QiLCJpYXQiOjE3MTc0ODk4NjQsImV4cCI6MTcxNzQ5NzA2NH0.AkKskHntaXKT7wJ1BmwWMe9xcpyxWbY54CWfj6R9_t4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n     \"note\": \"This is an emergency note\",\n     \"status\": true\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/emergencies/create",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emergencies",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Emergencies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n     \"userId\": \"cced6533-67b0-4931-a1a4-68d38e8052ce\",\n     \"note\": \"Help\",\n     \"status\": true\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/emergencies/dca9ced3-2828-41ab-93e6-9bc4d575c466/update",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emergencies",
+								"dca9ced3-2828-41ab-93e6-9bc4d575c466",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Emergencies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n     \"userId\": \"cced6533-67b0-4931-a1a4-68d38e8052ce\",\n     \"note\": \"Help\",\n     \"status\": true\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/emergencies/83a62641-7cc7-4d95-8e69-c583446575ab/delete",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emergencies",
+								"83a62641-7cc7-4d95-8e69-c583446575ab",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Emergencies by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n     \"userId\": \"cced6533-67b0-4931-a1a4-68d38e8052ce\",\n     \"note\": \"Help\",\n     \"status\": true\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/emergencies/dca9ced3-2828-41ab-93e6-9bc4d575c466/list",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emergencies",
+								"dca9ced3-2828-41ab-93e6-9bc4d575c466",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Emergencies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjY2VkNjUzMy02N2IwLTQ5MzEtYTFhNC02OGQzOGU4MDUyY2UiLCJpYXQiOjE3MTY1MjgyMzcsImV4cCI6MTcxNjUzNTQzN30.RHThegFwDSJ009tCGZ7uQovozgP4xdwwH0kOIxwS1YM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n     \"userId\": \"cced6533-67b0-4931-a1a4-68d38e8052ce\",\n     \"note\": \"Help\",\n     \"status\": true\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/emergencies/all",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emergencies",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Tracker",
+			"item": [
+				{
+					"name": "Create User Tracker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGZlNzlmZS1iMWFlLTRhMTAtYjM5Yy05YjU5YWY0NWNjN2QiLCJpYXQiOjE3MTc0ODk4NjQsImV4cCI6MTcxNzQ5NzA2NH0.AkKskHntaXKT7wJ1BmwWMe9xcpyxWbY54CWfj6R9_t4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{ \n   \"pubId\": \"74ce4235-88a7-48a6-a267-79426f81b263\",\n   \"startDateTime\": \"2024-05-24\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/user-tracker/create",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-tracker",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Tracker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhY2JhOGM1Zi1kYjk5LTQ5NGItYTg4MS02ZDYyMjc2NGM1NDUiLCJpYXQiOjE3MTY1MzAwOTUsImV4cCI6MTcxNjUzNzI5NX0.50vfXtDhZmsk6gFbii1M7Oqlq49eZLnpSBctWvfWbBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{ \n   \"pubId\": \"41eef60d-5e9e-46ff-ae03-237402102b7e\",\n   \"startDateTime\": \"2024-05-24\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/user-tracker/08373c21-1b91-4ea4-be1b-8f87580172f6/update",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-tracker",
+								"08373c21-1b91-4ea4-be1b-8f87580172f6",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Tracker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhY2JhOGM1Zi1kYjk5LTQ5NGItYTg4MS02ZDYyMjc2NGM1NDUiLCJpYXQiOjE3MTY1MzAwOTUsImV4cCI6MTcxNjUzNzI5NX0.50vfXtDhZmsk6gFbii1M7Oqlq49eZLnpSBctWvfWbBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/user-tracker/2bd74df9-9e27-4598-8c04-188680e80250/delete",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-tracker",
+								"2bd74df9-9e27-4598-8c04-188680e80250",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User Tracker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhY2JhOGM1Zi1kYjk5LTQ5NGItYTg4MS02ZDYyMjc2NGM1NDUiLCJpYXQiOjE3MTY1MzAwOTUsImV4cCI6MTcxNjUzNzI5NX0.50vfXtDhZmsk6gFbii1M7Oqlq49eZLnpSBctWvfWbBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/user-tracker/all",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-tracker",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Tracker by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhY2JhOGM1Zi1kYjk5LTQ5NGItYTg4MS02ZDYyMjc2NGM1NDUiLCJpYXQiOjE3MTY1MzAwOTUsImV4cCI6MTcxNjUzNzI5NX0.50vfXtDhZmsk6gFbii1M7Oqlq49eZLnpSBctWvfWbBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/user-tracker/53d3cd0a-9901-4094-a93d-a387910a4bd5/list",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-tracker",
+								"53d3cd0a-9901-4094-a93d-a387910a4bd5",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Tracker by User Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhY2JhOGM1Zi1kYjk5LTQ5NGItYTg4MS02ZDYyMjc2NGM1NDUiLCJpYXQiOjE3MTY1MzAwOTUsImV4cCI6MTcxNjUzNzI5NX0.50vfXtDhZmsk6gFbii1M7Oqlq49eZLnpSBctWvfWbBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tracker-api.pobcrawl.com/api/v1/user-tracker/acba8c5f-db99-494b-a881-6d622764c545/user",
+							"protocol": "https",
+							"host": [
+								"tracker-api",
+								"pobcrawl",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-tracker",
+								"acba8c5f-db99-494b-a881-6d622764c545",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
