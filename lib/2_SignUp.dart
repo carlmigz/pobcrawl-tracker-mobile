@@ -1,12 +1,12 @@
+import 'dart:convert';
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:pobcrawl_tracker/3_GetStarted.dart';
+import 'package:pobcrawl_tracker/3_Login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -16,8 +16,56 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  bool obscureText = false;
+  bool obscureText = true;
   bool isChecked = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  Future<void> registerUser() async {
+    final String email = emailController.text.trim();
+    final String password = passwordController.text.trim();
+    final String confirmPassword = confirmPasswordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      Get.snackbar('Error', 'Please fill all fields',
+          colorText: const Color(0xFFFFFFFF));
+      return;
+    }
+
+    if (password != confirmPassword) {
+      Get.snackbar('Error', 'Passwords do not match',
+          colorText: const Color(0xFFFFFFFF));
+      return;
+    }
+
+    final url =
+        Uri.parse('https://tracker-api.pobcrawl.com/api/v1/accounts/register');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'firstName': '', // Add firstName if required by the API
+        'lastName': '', // Add lastName if required by the API
+        'emailAddress': email,
+        'password': password,
+        'confirmPassword': confirmPassword,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Get.snackbar('Success', 'Registration successful',
+          colorText: const Color(0xFFFFFFFF));
+      Get.to(() => const GetStarted(),
+          transition: Transition.rightToLeft,
+          duration: const Duration(milliseconds: 400));
+    } else {
+      final responseBody = jsonDecode(response.body);
+      Get.snackbar('Error', responseBody['message'] ?? 'Registration failed',
+          colorText: const Color(0xFFFFFFFF));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +103,11 @@ class _SignUpState extends State<SignUp> {
                 child: Image.asset('assets/images/decor-2.png'),
               ),
               Positioned(
+                top: 80,
+                left: 230,
+                child: Image.asset('assets/images/decor-3.png'),
+              ),
+              Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
@@ -79,9 +132,7 @@ class _SignUpState extends State<SignUp> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Padding(
-                                padding: EdgeInsets.all(5.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(5.0)),
                               Text(
                                 'Welcome to Pobcrawl!',
                                 style: GoogleFonts.poppins(
@@ -98,9 +149,7 @@ class _SignUpState extends State<SignUp> {
                                   color: Colors.white,
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(15.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(15.0)),
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
@@ -112,10 +161,9 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(8.0)),
                               TextField(
+                                controller: emailController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: const Color(0xFFFFFFFF),
@@ -137,11 +185,10 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 cursorColor: const Color(0xFFFF5800),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(8.0)),
                               TextField(
-                                obscureText: true,
+                                controller: passwordController,
+                                obscureText: obscureText,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: const Color(0xFFFFFFFF),
@@ -156,9 +203,11 @@ class _SignUpState extends State<SignUp> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   suffixIcon: IconButton(
-                                    icon: Icon(obscureText
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
+                                    icon: Icon(
+                                      obscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
                                     onPressed: () {
                                       setState(() {
                                         obscureText = !obscureText;
@@ -173,11 +222,10 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 cursorColor: const Color(0xFFFF5800),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(8.0)),
                               TextField(
-                                obscureText: true,
+                                controller: confirmPasswordController,
+                                obscureText: obscureText,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: const Color(0xFFFFFFFF),
@@ -192,9 +240,11 @@ class _SignUpState extends State<SignUp> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   suffixIcon: IconButton(
-                                    icon: Icon(obscureText
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
+                                    icon: Icon(
+                                      obscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
                                     onPressed: () {
                                       setState(() {
                                         obscureText = !obscureText;
@@ -209,9 +259,7 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 cursorColor: const Color(0xFFFF5800),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(15.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(15.0)),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -229,12 +277,12 @@ class _SignUpState extends State<SignUp> {
                                             BorderRadius.circular(20.0),
                                         border: Border.all(
                                           color: isChecked
-                                              ? Color(0XFF1A396C)
+                                              ? const Color(0XFF1A396C)
                                               : Colors.grey,
                                           width: 2.0,
                                         ),
                                         color: isChecked
-                                            ? Color(0XFF1A396C)
+                                            ? const Color(0XFF1A396C)
                                             : Colors.grey,
                                       ),
                                       child: isChecked
@@ -257,9 +305,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ],
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(10.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(10.0)),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
@@ -268,15 +314,7 @@ class _SignUpState extends State<SignUp> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                                onPressed: () {
-                                  Get.to(
-                                    () => const GetStarted(),
-                                    transition: Transition.rightToLeft,
-                                    duration: const Duration(
-                                      milliseconds: 400,
-                                    ),
-                                  );
-                                },
+                                onPressed: registerUser,
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: Padding(
@@ -294,9 +332,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(30.0),
-                              ),
+                              const Padding(padding: EdgeInsets.all(30.0)),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -308,12 +344,20 @@ class _SignUpState extends State<SignUp> {
                                       color: const Color(0xFFFFFFFF),
                                     ),
                                   ),
-                                  Text(
-                                    'Log in',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xFFFFFFFF),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => const Login(),
+                                          transition: Transition.rightToLeft,
+                                          duration: const Duration(
+                                              milliseconds: 100));
+                                    },
+                                    child: Text(
+                                      'Log in',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xFFFFFFFF),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -325,11 +369,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                top: 80,
-                left: 230,
-                child: Image.asset('assets/images/decor-3.png'),
               ),
             ],
           ),

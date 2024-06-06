@@ -1,13 +1,15 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 class Event {
   final String name;
   final String time;
   final String location;
-  final List<String> imagePaths;
+  final List<String?> imagePaths;
   final String status;
 
   Event({
@@ -17,10 +19,26 @@ class Event {
     required this.imagePaths,
     required this.status,
   });
+
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
+      name: json['name'] ?? '',
+      time: json['openingTime'] ?? '',
+      location: json['address'] ?? '',
+      imagePaths: [
+        'https://tracker-api.pobcrawl.com/images/${json['image_1']}',
+        'https://tracker-api.pobcrawl.com/images/${json['image_2']}',
+        'https://tracker-api.pobcrawl.com/images/${json['image_3']}',
+        'https://tracker-api.pobcrawl.com/images/${json['image_4']}',
+        'https://tracker-api.pobcrawl.com/images/${json['image_5']}',
+      ],
+      status: json['status'] ? 'Active' : 'Inactive',
+    );
+  }
 }
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -28,42 +46,28 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final CarouselController _controller = CarouselController();
+  List<Event> events = [];
 
-  final List<Event> events = [
-    Event(
-      name: 'The Fun Roof',
-      time: '12AM',
-      location: '11th Floor, 7846 Makati Ave. Poblacion, Makati City',
-      imagePaths: [
-        'assets/images/fun-roof-img.png',
-        'assets/images/fun-roof-img.png',
-        'assets/images/fun-roof-img.png',
-      ],
-      status: ' 01:10:21',
-    ),
-    Event(
-      name: 'The Fun Roof',
-      time: '12AM',
-      location: '11th Floor, 7846 Makati Ave. Poblacion, Makati City',
-      imagePaths: [
-        'assets/images/fun-roof-img.png',
-        'assets/images/fun-roof-img.png',
-        'assets/images/fun-roof-img.png',
-      ],
-      status: ' 01:10:21',
-    ),
-    Event(
-      name: 'The Fun Roof',
-      time: '12AM',
-      location: '11th Floor, 7846 Makati Ave. Poblacion, Makati City',
-      imagePaths: [
-        'assets/images/fun-roof-img.png',
-        'assets/images/fun-roof-img.png',
-        'assets/images/fun-roof-img.png',
-      ],
-      status: ' 01:10:21',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    fetchEvents();
+  }
+
+  Future<void> fetchEvents() async {
+    final response = await http.get(
+        Uri.parse('https://tracker-api.pobcrawl.com/api/v1/pubs/show-all'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        events = (data['pubLists'] as List)
+            .map((item) => Event.fromJson(item))
+            .toList();
+      });
+    } else {
+      throw Exception('Failed to load events');
+    }
+  }
 
   int _current = 0;
 
@@ -198,9 +202,11 @@ class _DashboardState extends State<Dashboard> {
                                                         Radius.circular(20.0)),
                                                 child: Stack(
                                                   children: <Widget>[
-                                                    Image.asset(item,
-                                                        fit: BoxFit.cover,
-                                                        width: 1000.0),
+                                                    Image.network(
+                                                      item!,
+                                                      fit: BoxFit.cover,
+                                                      width: 1000.0,
+                                                    ),
                                                     Positioned(
                                                       bottom: 0.0,
                                                       left: 0.0,
