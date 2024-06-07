@@ -1,95 +1,74 @@
-import 'dart:convert';
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:pobcrawl_tracker/3_GetStarted.dart';
-import 'package:http/http.dart' as http;
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'dart:io';
 
-class TestAPI extends StatefulWidget {
-  const TestAPI({Key? key}) : super(key: key);
+class QRScannerPage extends StatefulWidget {
+  const QRScannerPage({super.key});
 
   @override
-  State<TestAPI> createState() => _TestAPIState();
+  _QRScannerPageState createState() => _QRScannerPageState();
 }
 
-class _TestAPIState extends State<TestAPI> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+class _QRScannerPageState extends State<QRScannerPage> {
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? controller;
+  String? qrText;
 
-  Future<void> TestAPI() async {
-    String firstName = firstNameController.text;
-    String lastName = lastNameController.text;
-    String email = emailController.text;
-    String password = passwordController.text;
-
-    // Make a POST request to the register endpoint
-    var response = await http.post(
-      Uri.https('tracker-api.pobcrawl.com', '/api/v1/accounts/register'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'firstName': firstName,
-        'lastName': lastName,
-        'emailAddress': email,
-        'password': password,
-      }),
-    );
-
-    // Parse the response
-    if (response.statusCode == 200) {
-      // Registration successful, handle navigation or other actions
-      // For example, navigate to the next screen
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => NextScreen()));
-    } else {
-      // Registration failed, display error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registration failed')),
-      );
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller?.pauseCamera();
     }
+    controller?.resumeCamera();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-              controller: firstNameController,
-              decoration: InputDecoration(labelText: 'First Name'),
+      appBar: AppBar(title: Text('QR Code Scanner')),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: QRView(
+              key: qrKey,
+              overlayMargin: EdgeInsets.zero,
+              onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                borderColor: const Color(0xFFFFFFFF),
+                borderLength: 50,
+                borderWidth: 10,
+                cutOutSize: 300,
+              ),
             ),
-            TextField(
-              controller: lastNameController,
-              decoration: InputDecoration(labelText: 'Last Name'),
+          ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: (qrText != null)
+                  ? Text('Result: $qrText')
+                  : Text('Scan a code'),
             ),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: TestAPI,
-              child: Text('Sign Up'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        qrText = scanData.code;
+      });
+    });
+    controller.resumeCamera();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }

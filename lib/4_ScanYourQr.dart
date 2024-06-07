@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pobcrawl_tracker/5_SeeAllOngoing.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanYourQR extends StatefulWidget {
   const ScanYourQR({super.key});
@@ -13,6 +15,36 @@ class ScanYourQR extends StatefulWidget {
 }
 
 class _ScanYourQRState extends State<ScanYourQR> {
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? controller;
+
+  String? qrText;
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        qrText = scanData.code;
+      });
+    });
+    controller.resumeCamera();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller?.pauseCamera();
+    }
+    controller?.resumeCamera();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,10 +85,22 @@ class _ScanYourQRState extends State<ScanYourQR> {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(20.0),
                     ),
                     Center(
-                      child: Image.asset('assets/images/scan-your-qr.png'),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: QRView(
+                          key: qrKey,
+                          onQRViewCreated: _onQRViewCreated,
+                          overlay: QrScannerOverlayShape(
+                            borderColor: Colors.white,
+                            borderLength: 50,
+                            borderWidth: 5,
+                            cutOutSize: 600,
+                          ),
+                        ),
+                      ),
                     ),
                     const Padding(
                       padding: EdgeInsets.all(40.0),
