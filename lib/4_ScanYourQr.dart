@@ -19,12 +19,19 @@ class _ScanYourQRState extends State<ScanYourQR> {
   QRViewController? controller;
 
   String? qrText;
+  bool isScanning = false;
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         qrText = scanData.code;
+        // If QR scan successful, proceed to the next page
+        if (qrText != null) {
+          Get.to(() => const SeeAllOngoing(),
+              transition: Transition.rightToLeft,
+              duration: const Duration(milliseconds: 400));
+        }
       });
     });
     controller.resumeCamera();
@@ -110,20 +117,22 @@ class _ScanYourQRState extends State<ScanYourQR> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
-                          backgroundColor: const Color(0xFFFF5800),
+                          backgroundColor: isScanning
+                              ? const Color(0xFFFF5800).withOpacity(0.5)
+                              : const Color(0xFFFF5800),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        onPressed: () {
-                          Get.to(
-                            () => const SeeAllOngoing(),
-                            transition: Transition.rightToLeft,
-                            duration: const Duration(
-                              milliseconds: 400,
-                            ),
-                          );
-                        },
+                        onPressed: isScanning
+                            ? null
+                            : () {
+                                // Start scanning for QR codes
+                                setState(() {
+                                  isScanning = true;
+                                });
+                                controller?.resumeCamera();
+                              },
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Row(
