@@ -26,11 +26,11 @@ class Event {
       time: json['openingTime'] ?? '',
       location: json['address'] ?? '',
       imagePaths: [
-        'https://tracker-api.pobcrawl.com/images/${json['image_1']}',
-        'https://tracker-api.pobcrawl.com/images/${json['image_2']}',
-        'https://tracker-api.pobcrawl.com/images/${json['image_3']}',
-        'https://tracker-api.pobcrawl.com/images/${json['image_4']}',
-        'https://tracker-api.pobcrawl.com/images/${json['image_5']}',
+        'https://tracker-api.pobcrawl.com/public/pubs-upload/${json['image_1']}',
+        'https://tracker-api.pobcrawl.com/public/pubs-upload/${json['image_2']}',
+        'https://tracker-api.pobcrawl.com/public/pubs-upload/${json['image_3']}',
+        'https://tracker-api.pobcrawl.com/public/pubs-upload/${json['image_4']}',
+        'https://tracker-api.pobcrawl.com/public/pubs-upload/${json['image_5']}',
       ],
       status: json['status'] ? 'Active' : 'Inactive',
     );
