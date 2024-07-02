@@ -1,17 +1,18 @@
 name: pobcrawl_tracker
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
   get: ^4.6.6
-  qr_code_scanner: 1.0.0 
+  qr_code_scanner: 1.0.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -20,13 +21,14 @@ dev_dependencies:
   google_fonts: 6.1.0
   carousel_slider: 4.2.1
   http: 1.1.0
-
+  gap: ^3.0.1
 
 flutter:
   uses-material-design: true
   assets:
-  # Images
+    # Images
     - assets/images/splash-img.png
+    - assets/images/
     - assets/images/topographic.png
     - assets/images/decor-1.png
     - assets/images/decor-2.png
@@ -36,15 +38,15 @@ flutter:
     - assets/images/decor-6.png
     - assets/images/FAB-img.png
     - assets/images/qr-img.png
-    - assets/images/divider-img.png  
-    - assets/images/scan-your-qr.png  
-    - assets/images/dashboard-home-indicator.png  
+    - assets/images/divider-img.png
+    - assets/images/scan-your-qr.png
+    - assets/images/dashboard-home-indicator.png
     - assets/images/fun-roof-img.png
 
-  # Background Images:
-    - assets/images/see-all-ongoing-bg.png 
-  # Carousel Images:
-  # Icons
+    # Background Images:
+    - assets/images/see-all-ongoing-bg.png
+    # Carousel Images:
+    # Icons
     - assets/icons/hide-pass-ic.png
     - assets/icons/scan-qr-ic.png
     - assets/icons/time-ic.png

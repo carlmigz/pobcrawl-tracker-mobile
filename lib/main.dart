@@ -7,19 +7,41 @@ import 'package:pobcrawl_tracker/1_SplashScreen.dart';
 import 'package:pobcrawl_tracker/5_SeeAllOngoing.dart';
 import 'package:pobcrawl_tracker/6_Dashboard.dart';
 import 'package:pobcrawl_tracker/test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future<bool> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
+      title: 'Pobcrawl Tracker',
       debugShowCheckedModeBanner: false,
-      home: ScanYourQR(),
+      home: FutureBuilder<bool>(
+        future: isLoggedIn(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final isLogged = snapshot.data!;
+            return isLogged ? Dashboard() : SplashScreen();
+          } else {
+            return CircularProgressIndicator(); // Show a loading indicator
+          }
+        },
+      ),
     );
   }
 }

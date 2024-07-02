@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pobcrawl_tracker/5_SeeAllOngoing.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import '6_Dashboard.dart';
+
 class ScanYourQR extends StatefulWidget {
   const ScanYourQR({super.key});
 
@@ -21,26 +23,43 @@ class _ScanYourQRState extends State<ScanYourQR> {
   String? qrText;
   bool isScanning = false;
 
+  // void _onQRViewCreated(QRViewController controller) {
+  //   this.controller = controller;
+  //   controller.scannedDataStream.listen((scanData) {
+  //     setState(() {
+  //       qrText = scanData.code;
+  //       // If QR scan successful, proceed to the next page
+  //       if (qrText != null) {
+  //         Get.to(() => const SeeAllOngoing(),
+  //             transition: Transition.rightToLeft,
+  //             duration: const Duration(milliseconds: 400));
+  //       }
+  //     });
+  //   });
+  //   controller.resumeCamera();
+  // }
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        qrText = scanData.code;
-        // If QR scan successful, proceed to the next page
-        if (qrText != null) {
-          Get.to(() => const SeeAllOngoing(),
-              transition: Transition.rightToLeft,
-              duration: const Duration(milliseconds: 400));
-        }
-      });
+      if (!isScanning) {
+        setState(() {
+          isScanning = true;
+          qrText = scanData.code;
+          if (qrText != null) {
+            controller.pauseCamera();
+            Get.to(() => const Dashboard(),
+                    transition: Transition.rightToLeft,
+                    duration: const Duration(milliseconds: 400))
+                ?.then((value) {
+              setState(() {
+                isScanning = false;
+                controller.resumeCamera();
+              });
+            });
+          }
+        });
+      }
     });
-    controller.resumeCamera();
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 
   @override
@@ -50,6 +69,12 @@ class _ScanYourQRState extends State<ScanYourQR> {
       controller?.pauseCamera();
     }
     controller?.resumeCamera();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -112,8 +137,9 @@ class _ScanYourQRState extends State<ScanYourQR> {
                     const Padding(
                       padding: EdgeInsets.all(40.0),
                     ),
-                    SizedBox(
+                    Container(
                       width: 250,
+                      //   color: Colors.amber,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
@@ -133,25 +159,22 @@ class _ScanYourQRState extends State<ScanYourQR> {
                                 });
                                 controller?.resumeCamera();
                               },
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/scan-qr-ic.png',
-                                width: 20,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/icons/scan-qr-ic.png',
+                              width: 15,
+                            ),
+                            Text(
+                              '  Scan QR Code',
+                              style: GoogleFonts.poppins(
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                color: const Color(0xFFFFFFFF),
                               ),
-                              Text(
-                                '  Scan QR Code',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.normal,
-                                  color: const Color(0xFFFFFFFF),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

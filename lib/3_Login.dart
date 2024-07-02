@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:pobcrawl_tracker/2_SignUp.dart';
 import 'package:pobcrawl_tracker/3_GetStarted.dart';
 import 'package:pobcrawl_tracker/6_Dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -52,9 +53,11 @@ class _LoginState extends State<Login> {
     if (response.statusCode == 200) {
       Get.snackbar('Success', 'Login successful',
           colorText: const Color(0xFFFFFFFF));
-      Get.to(() => const Dashboard(),
+      Get.to(() => const GetStarted(),
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 100));
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
     } else {
       final responseBody = jsonDecode(response.body);
       Get.snackbar('Error', responseBody['message'] ?? 'Login failed',
