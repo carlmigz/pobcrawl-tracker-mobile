@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pobcrawl_tracker/2_SignUp.dart';
-import 'package:pobcrawl_tracker/3_Login.dart';
+import 'package:pobcrawl_tracker/signup/signup_page.dart';
+import 'package:pobcrawl_tracker/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Get.to(
-        () => const Login(),
+        () => const LoginPage(),
         transition: Transition.rightToLeft,
         duration: const Duration(
           milliseconds: 400,
