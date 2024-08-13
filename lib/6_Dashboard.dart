@@ -146,8 +146,8 @@ class _DashboardState extends State<Dashboard> {
                                         eTime: event.time,
                                         eImgs: event.imagePaths as List,
                                       ),
-                                  transition: Transition.rightToLeft,
-                                  duration: const Duration(milliseconds: 100));
+                                  transition: Transition.downToUp,
+                                  duration: const Duration(milliseconds: 1500));
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 25),

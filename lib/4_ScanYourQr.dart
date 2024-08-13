@@ -31,15 +31,15 @@ class _ScanYourQRState extends State<ScanYourQR> {
           isScanning = true;
           qrText = scanData.code;
           if (qrText != null) {
+            print(qrText);
             controller.pauseCamera();
-            controller.dispose();
-            Get.to(() => const Dashboard(),
+            Get.off(() => const Dashboard(),
                     transition: Transition.rightToLeft,
                     duration: const Duration(milliseconds: 400))
                 ?.then((value) {
               setState(() {
                 isScanning = false;
-                controller.resumeCamera();
+                controller.stopCamera();
               });
             });
           }

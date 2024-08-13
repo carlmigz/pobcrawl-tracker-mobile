@@ -362,8 +362,8 @@ class _EventDetailpageState extends State<EventDetailpage> {
                             eConvenienceFee: '',
                             eTicketFee: '',
                           ),
-                      transition: Transition.rightToLeft,
-                      duration: const Duration(milliseconds: 100));
+                      transition: Transition.downToUp,
+                      duration: const Duration(milliseconds: 1500));
                 },
                 child: Container(
                   width: deviceSize.width,

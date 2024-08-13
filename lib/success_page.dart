@@ -71,8 +71,8 @@ class _SuccessPageState extends State<SuccessPage> {
                 InkWell(
                   onTap: () {
                     Get.to(() => Dashboard(),
-                        transition: Transition.rightToLeft,
-                        duration: const Duration(milliseconds: 100));
+                        transition: Transition.downToUp,
+                        duration: const Duration(milliseconds: 1500));
                   },
                   child: Text(
                     'Go to Home',

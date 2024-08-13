@@ -241,8 +241,8 @@ class _BookingPageState extends State<BookingPage> {
         InkWell(
           onTap: () {
             Get.to(() => SuccessPage(),
-                transition: Transition.rightToLeft,
-                duration: const Duration(milliseconds: 100));
+                transition: Transition.downToUp,
+                duration: const Duration(milliseconds: 1500));
           },
           child: Container(
             width: deviceSize.width * .9,
