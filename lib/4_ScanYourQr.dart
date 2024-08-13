@@ -23,21 +23,6 @@ class _ScanYourQRState extends State<ScanYourQR> {
   String? qrText;
   bool isScanning = false;
 
-  // void _onQRViewCreated(QRViewController controller) {
-  //   this.controller = controller;
-  //   controller.scannedDataStream.listen((scanData) {
-  //     setState(() {
-  //       qrText = scanData.code;
-  //       // If QR scan successful, proceed to the next page
-  //       if (qrText != null) {
-  //         Get.to(() => const SeeAllOngoing(),
-  //             transition: Transition.rightToLeft,
-  //             duration: const Duration(milliseconds: 400));
-  //       }
-  //     });
-  //   });
-  //   controller.resumeCamera();
-  // }
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
@@ -47,6 +32,7 @@ class _ScanYourQRState extends State<ScanYourQR> {
           qrText = scanData.code;
           if (qrText != null) {
             controller.pauseCamera();
+            controller.dispose();
             Get.to(() => const Dashboard(),
                     transition: Transition.rightToLeft,
                     duration: const Duration(milliseconds: 400))

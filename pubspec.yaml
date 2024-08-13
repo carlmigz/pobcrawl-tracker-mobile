@@ -13,6 +13,7 @@ dependencies:
   get: ^4.6.6
   qr_code_scanner: 1.0.0
   shared_preferences: ^2.2.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -22,6 +23,8 @@ dev_dependencies:
   carousel_slider: 4.2.1
   http: 1.1.0
   gap: ^3.0.1
+  flutter_svg: ^2.0.10+1
+  animated_splash_screen: ^1.3.0
 
 flutter:
   uses-material-design: true
@@ -47,6 +50,7 @@ flutter:
     - assets/images/see-all-ongoing-bg.png
     # Carousel Images:
     # Icons
+    - assets/icons/
     - assets/icons/hide-pass-ic.png
     - assets/icons/scan-qr-ic.png
     - assets/icons/time-ic.png

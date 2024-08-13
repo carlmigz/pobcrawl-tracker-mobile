@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pobcrawl_tracker/signup/signup_page.dart';
-import 'package:pobcrawl_tracker/login_page.dart';
+import 'package:pobcrawl_tracker/login/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

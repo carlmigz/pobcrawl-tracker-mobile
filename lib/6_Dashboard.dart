@@ -142,8 +142,9 @@ class _DashboardState extends State<Dashboard> {
                                         eName: event.name,
                                         eFee: "1000",
                                         eAddress: event.location,
-                                        eDate: '10-25',
+                                        eDate: '2024-07-30',
                                         eTime: event.time,
+                                        eImgs: event.imagePaths as List,
                                       ),
                                   transition: Transition.rightToLeft,
                                   duration: const Duration(milliseconds: 100));

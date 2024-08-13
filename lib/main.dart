@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
-import 'package:pobcrawl_tracker/1_SplashScreen.dart';
-import 'package:pobcrawl_tracker/5_SeeAllOngoing.dart';
-import 'package:pobcrawl_tracker/6_Dashboard.dart';
-import 'package:pobcrawl_tracker/test.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:pobcrawl_tracker/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '6_Dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +36,14 @@ class _MyAppState extends State<MyApp> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final isLogged = snapshot.data!;
-            return isLogged ? Dashboard() : SplashScreen();
+            return AnimatedSplashScreen(
+              splash: 'assets/images/splash.gif',
+              splashIconSize: 2000.0,
+              centered: true,
+              nextScreen: isLogged ? Dashboard() : LoginPage(),
+              backgroundColor: Color(0xff031531),
+              duration: 5500,
+            );
           } else {
             return CircularProgressIndicator(); // Show a loading indicator
           }

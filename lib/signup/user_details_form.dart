@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pobcrawl_tracker/signup/signup_page.dart';
-import '../login_page.dart';
+import '../login/login_page.dart';
 import '../utils.dart';
 import 'package:gap/gap.dart';
 
@@ -156,7 +156,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
-                                                return 'First Name is Required!';
+                                                return 'Field is Required!';
                                               }
                                               // Directly place the regex pattern inside the validator
 
@@ -197,7 +197,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
-                                                return 'Last Name is Required!';
+                                                return 'Field is Required!';
                                               }
                                               // Directly place the regex pattern inside the validator
 
