@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
@@ -5,18 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pobcrawl_tracker/5_SeeAllOngoing.dart';
+import 'package:pobcrawl_tracker/qr/services/get_event_service.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '6_Dashboard.dart';
+import '../api/baseurl_api_class.dart';
+import '../home_page.dart';
 
-class ScanYourQR extends StatefulWidget {
-  const ScanYourQR({super.key});
+class QrscanPage extends StatefulWidget {
+  const QrscanPage({super.key});
 
   @override
-  State<ScanYourQR> createState() => _ScanYourQRState();
+  State<QrscanPage> createState() => _QrscanPageState();
 }
 
-class _ScanYourQRState extends State<ScanYourQR> {
+class _QrscanPageState extends State<QrscanPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
 
@@ -31,21 +35,65 @@ class _ScanYourQRState extends State<ScanYourQR> {
           isScanning = true;
           qrText = scanData.code;
           if (qrText != null) {
-            print(qrText);
+            // Map<String, dynamic> _json = jsonDecode(qrText!);
+            // String eventId = _json['eventId'];
+            // print('eventID: $eventId');
+
+            // _getEventFunc(eventId);
+            Get.off(() => HomePage(),
+                transition: Transition.downToUp,
+                duration: const Duration(milliseconds: 1000));
+
             controller.pauseCamera();
-            Get.off(() => const Dashboard(),
-                    transition: Transition.rightToLeft,
-                    duration: const Duration(milliseconds: 400))
-                ?.then((value) {
-              setState(() {
-                isScanning = false;
-                controller.stopCamera();
-              });
+            setState(() {
+              isScanning = false;
+              controller.stopCamera();
             });
           }
         });
       }
     });
+  }
+
+  final BaseUrlApiClass baseUrlApiClass = BaseUrlApiClass();
+  late final GetEventService getEventService;
+
+  @override
+  void initState() {
+    super.initState();
+    getEventService = GetEventService(baseUrlApiClass.baseUrl, baseUrlApiClass);
+  }
+
+  bool _isLoading = false;
+
+  Future<void> _getEventFunc(String eventId) async {
+    setState(() {
+      _isLoading = true;
+    });
+    print('eventID: $eventId');
+
+    try {
+      Map<String, dynamic> response =
+          await getEventService.getEvent(eventId: eventId);
+      print(response['success']);
+      if (response['success'] == true) {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('eventDetails', response.toString());
+        Get.off(
+            () => HomePage(
+                  eventDetails: response,
+                ),
+            transition: Transition.downToUp,
+            duration: const Duration(milliseconds: 1000));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override

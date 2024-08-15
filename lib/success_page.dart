@@ -3,8 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pobcrawl_tracker/6_Dashboard.dart';
+import 'package:pobcrawl_tracker/home_page.dart';
 import 'package:pobcrawl_tracker/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SuccessPage extends StatefulWidget {
   const SuccessPage({super.key});
@@ -14,6 +15,24 @@ class SuccessPage extends StatefulWidget {
 }
 
 class _SuccessPageState extends State<SuccessPage> {
+  @override
+  void initState() {
+    _getUserData();
+    super.initState();
+  }
+
+  String? _eventDetails;
+  Future<void> _getUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString('eventDetails') ?? '';
+
+    setState(() {
+      _eventDetails = data;
+    });
+
+    // Use the retrieved userName here
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -70,7 +89,10 @@ class _SuccessPageState extends State<SuccessPage> {
                 Gap(deviceSize.height * .25),
                 InkWell(
                   onTap: () {
-                    Get.to(() => Dashboard(),
+                    Get.to(
+                        () => HomePage(
+                              eventDetails: _eventDetails,
+                            ),
                         transition: Transition.downToUp,
                         duration: const Duration(milliseconds: 1500));
                   },

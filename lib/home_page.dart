@@ -42,21 +42,27 @@ class Event {
   }
 }
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  final eventDetails;
+  const HomePage({Key? key, this.eventDetails}) : super(key: key);
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _HomePageState extends State<HomePage> {
   final CarouselController _controller = CarouselController();
   List<Event> events = [];
+
+  late Map<String, dynamic>? data = widget.eventDetails;
+
+  late String name = data?['result']['name'];
 
   @override
   void initState() {
     super.initState();
     fetchEvents();
+    // print(name);
   }
 
   Future<void> fetchEvents() async {
@@ -114,12 +120,17 @@ class _DashboardState extends State<Dashboard> {
                             const Padding(
                               padding: EdgeInsets.all(10.0),
                             ),
-                            Text(
-                              'Tonight events',
-                              style: GoogleFonts.poppins(
-                                fontSize: 31,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFFFFFFFF),
+                            InkWell(
+                              onTap: () {
+                                print(name);
+                              },
+                              child: Text(
+                                'Tonight events',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 31,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFFFFFFFF),
+                                ),
                               ),
                             ),
                             const Padding(

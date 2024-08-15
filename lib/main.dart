@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:pobcrawl_tracker/login/login_page.dart';
+import 'package:pobcrawl_tracker/qr/qrscan_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '6_Dashboard.dart';
+import 'home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +41,9 @@ class _MyAppState extends State<MyApp> {
               splash: 'assets/images/splash.gif',
               splashIconSize: 2000.0,
               centered: true,
-              nextScreen: isLogged ? Dashboard() : LoginPage(),
+              nextScreen: HomePage(),
+              // isLogged ? HomePage() :
+              // LoginPage(),
               backgroundColor: Color(0xff031531),
               duration: 5500,
             );

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:pobcrawl_tracker/login/services/login_service.dart';
 import 'package:pobcrawl_tracker/signup/signup_page.dart';
 import 'package:pobcrawl_tracker/onboarding_page.dart';
-import 'package:pobcrawl_tracker/6_Dashboard.dart';
+import 'package:pobcrawl_tracker/home_page.dart';
 import 'package:pobcrawl_tracker/signup/user_details_form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gap/gap.dart';
